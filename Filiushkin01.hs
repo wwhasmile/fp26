@@ -3,21 +3,27 @@ module Filiushkin01 where
 
 -- Задача 1 -----------------------------------------
 lengthMy :: [Int] -> Int
-lengthMy xs = if null xs then 0 else 1 + lengthMy (tail xs)
+lengthMy [] = 0
+lengthMy xs = 1 + lengthMy (tail xs)
 
 -- Задача 2 -----------------------------------------
 listSum :: [Int] -> [Int] -> [Int]
-listSum xs ys = if null xs && null ys then [] else (if null xs then 0 else head xs) + (if null ys then 0 else head ys) : listSum (if null xs then [] else tail xs) (if null ys then [] else tail ys)
+listSum [] [] = []
+listSum [] (y:ys) = y : listSum [] ys
+listSum (x:xs) [] = x : listSum xs []
+listSum (x:xs) (y:ys) = x + y : listSum xs ys
 
 -- Задача 3 -----------------------------------------
 greatMy :: [Int] -> Int -> Int
-greatMy xs v = if null xs then 0 else (if head xs > v then 1 else 0) + greatMy (tail xs) v
+greatMy [] _ = 0
+greatMy (x:xs) v = (if x > v then 1 else 0) + greatMy xs v
 
 -- Задача 4 -----------------------------------------
-elemMy    ::  Int -> [Int] -> Bool
-elemMy x xs = not (null xs) && head xs == x || elemMy x (tail xs)
+elemMy :: Int -> [Int] -> Bool
+elemMy _ [] = False
+elemMy x (v:xs) = v == x || elemMy x xs
                      
 -- Задача 5 -----------------------------------------
 allMy :: [Bool] -> Bool
-allMy xs = null xs || head xs && allMy (tail xs)
-
+allMy [] = True
+allMy (x:xs) = x && allMy xs
