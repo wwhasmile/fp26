@@ -19,4 +19,4 @@ cntGood ps v = length $ filter ($ v) ps
 
 -- Задача 5 -----------------------------------------
 allReverse :: [String] -> [String]
-allReverse xss = reverse (map (reverse) xss)
+allReverse = map (reverse) . reverse 
